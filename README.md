@@ -1,4 +1,4 @@
-# NEWS-API
+# BLOGS
 
 ## DESCRIPTION
 
