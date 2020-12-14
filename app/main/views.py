@@ -17,11 +17,13 @@ def index():
     
     message= "Welcome to BLOG Application!!"
     title= 'BLOG-app!'
+    result = Opinion.query.all()
+    # print("our results",result)
 
     quote =getquote()
 
 
-    return render_template('index.html', message=message,title=title , quote= quote) 
+    return render_template('index.html', message=message,title=title , quote= quote, opinion = result) 
 
    
 
@@ -97,7 +99,6 @@ def new_opinion():
         new_opinion= Opinion(title=title,opinion= opinion,user_id=current_user.id)
         title='New opinion'
         new_opinion.save_opinion()
-        
         return redirect(url_for('main.new_opinion'))
     return render_template('opinion.html',form= form , quote = quote)
 
@@ -107,11 +108,15 @@ def new_comment(opinion_id):
 
     opinion = Opinion.query.filter_by(id = opinion_id).first()
     form = CommentForm()
+
+    
+        
     if form.validate_on_submit():
         comment = form.comment.data
         new_comment = Comments(comment=comment,user_id=current_user.id, opinion_id=opinion_id)
         new_comment.save_comment()
         return redirect(url_for('main.index'))
+
 
     title='New opinion'
     return render_template('new_comment.html',title=title,comment_form = form,opinion_id=opinion_id)

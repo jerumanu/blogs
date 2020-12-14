@@ -1,4 +1,3 @@
-
 {% extends 'base.html'%}
 
 {% import 'macros.html' as macro%}
@@ -11,26 +10,45 @@
 {% endblock %}
 {% block content %}
 
-<body >
+<body>
   <div class="container-fluid">
     <div class="d-flex justify-content-center row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <div class="card bg-dark">
-      <div class="card-groups">
-          <div class="card-body">
-            <h5 class="qouted-qoute" >{{quote.quote}}</h5>
-            <p class="qouted-author">{{quote.author}}</p>
-            <button type="button" class="btn btn-outline-primary"><a href="../opinion/">Enter a New blog</a></button>
-        </div>
+          <div class="card-groups">
+            <div class="card-body">
+              <h5 class="qouted-qoute">{{quote.quote}}</h5>
+              <p class="qouted-author">{{quote.author}}</p>
+              <button type="button" class="btn btn-outline-primary"><a href="../opinion/">Enter a New blog</a></button>
+            </div>
 
-      
-      </div>
-      </div>
+
+          </div>
+        </div>
       </div>
       <div class="col-md-3"></div>
     </div>
+    <div class="row">
+      {% for opinion in opinion %}
+      <div class="card">
+          <h4 class="opinion-title">{{opinion.opinion_title}}</h4>
+          <h5 class="subtitle"> {{opinion.description}}</h5>
+          <h6 class="opinion-name">Posted by ~ {{opinion.username}}</h6>
+          <img src="{{ opinion.username.profile_pic_path }}" alt="">
+          <p class="date text-muted">Posted on ~ {{opinion.date.strftime('%Y-%m-%d')}}</p>
+
+          <button type="button" class="btn btn-outline-success btn-sm"><a
+                  href="/new_comment/{{opinion.id}}">Comment</a></button>
+          <button type="button" class="btn btn-outline-success btn-sm"><a href="/comments/{{opinion.id}}">View
+                  comment</a></button>
+
+
+          
+      </div>
+      {%endfor%}
     </div>
-  
+  </div>
+
 </body>
-  {% endblock%}
+{% endblock%}
