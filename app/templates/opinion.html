@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='CSS/index.css')}}">
+{% endblock %}
+{% block content %}
+
+<body style="background-color:beige;">
+    <br>
+    <hr>
+    <h3 class="text-center">BLOGS</h3>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card-columns">
+
+                    <div class="card  border-success">
+
+                        <div class="card-body text">
+                            <div class="card-body">
+                                <h5 class="qouted-qoute">{{quote.quote}}</h5>
+                                <p class="qouted-author">{{quote.author}}</p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                   <div class="banner-post-banner">
+                <div class="container" id="post-banner">
+                    <h2 class="text-center text-white">Add blog</h2>
+                    <p class="text-center text-white">Add your blog here..</p>
+
+                    {{ wtf.quick_form(form)}}
+                </div>
+            </div>
+           
+            </div>
+            
+
+                    </div>
+                    </div>
+                    </div>
+                   
+
+                   {% for opinion in opinion %}
+                   <div class="card">
+                       <h4 class="opinion-title">{{opinion.opinion_title}}</h4>
+                       <h5 class="subtitle"> {{opinion.description}}</h5>
+                       <h6 class="opinion-name">Posted by ~ {{opinion.username}}</h6>
+                       <img src="{{ opinion.username.profile_pic_path }}" alt="">
+                       <p class="date text-muted">Posted on ~ {{opinion.date.strftime('%Y-%m-%d')}}</p>
+                       
+                       <button type="button" class="btn btn-outline-success btn-sm"><a href="/new_comment/{{opinion.id}}">Comment</a></button>
+                       <button type="button" class="btn btn-outline-success btn-sm"><a href="/comments/{{opinion.id}}">View comment</a></button>
+
+
+                        {%endfor%}    
+                        </div>
+        </div>
+                        
+                     </div>   
+
+
+
+</body>
+{% endblock %}

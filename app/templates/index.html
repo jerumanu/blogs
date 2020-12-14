@@ -1,0 +1,36 @@
+
+{% extends 'base.html'%}
+
+{% import 'macros.html' as macro%}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{% block content %}
+
+<body >
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card bg-dark">
+      <div class="card-groups">
+          <div class="card-body">
+            <h5 class="qouted-qoute" >{{quote.quote}}</h5>
+            <p class="qouted-author">{{quote.author}}</p>
+            <button type="button" class="btn btn-outline-primary"><a href="../opinion/">Enter a New blog</a></button>
+        </div>
+
+      
+      </div>
+      </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    </div>
+  
+</body>
+  {% endblock%}
